@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Product;
+use App\Models\Gudang;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +16,11 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index'); // Pastikan Anda memiliki view ini
+
+        $products = Product::all();
+        $gudangs = Gudang::all();
+
+        return view('admin.index', compact('products', 'gudangs'));
     }
 
     /**
@@ -27,7 +34,8 @@ class AdminController extends Controller
         $data = [
             'usersCount' => \App\Models\User::count(),
             'productsCount' => \App\Models\Product::count(),
-            'stockCount' => \App\Models\Stock::count(),
+            'gudangsCount' => \App\Models\Gudang::count(),
+
         ];
 
         return view('admin.dashboard', $data);

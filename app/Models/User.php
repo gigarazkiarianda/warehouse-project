@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->role === $roleName;
     }
+    public function biodata()
+    {
+        return $this->hasOne(Biodata::class);
+    }
+
 }

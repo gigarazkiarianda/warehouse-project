@@ -91,4 +91,9 @@ class BiodataController extends Controller
         $biodata->delete();
         return redirect()->route('biodata.index')->with('success', 'Biodata berhasil dihapus.');
     }
+
+    public function showDashboard() {
+        $biodata = Auth::user()->biodata; // Ambil data biodata dari user yang sedang login
+        return view('dashboard', compact('biodata'));
+    }
 }

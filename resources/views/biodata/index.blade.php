@@ -14,6 +14,11 @@
         <div class="alert alert-info">
             Belum ada biodata yang tersedia.
         </div>
+
+        <!-- Tombol Tambah Biodata -->
+        <div class="text-center mt-4">
+            <a href="{{ route('biodata.create') }}" class="btn btn-primary">Tambah Biodata</a>
+        </div>
     @else
         <div class="row">
             @foreach($biodatas as $biodata)

@@ -6,7 +6,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\StockController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BiodataController;
 
@@ -26,12 +25,11 @@ Route::get('/', [AuthController::class, 'showLoginForm'])->name('home');
 
 // Rute untuk otentikasi
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.post');
-
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
 
 // Rute yang memerlukan otentikasi
 Route::middleware(['auth'])->group(function () {

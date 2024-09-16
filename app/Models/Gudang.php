@@ -9,4 +9,9 @@ class Gudang extends Model
 {
     use HasFactory;
     protected $fillable = ['nama', 'lokasi', 'kapasitas'];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

@@ -6,8 +6,8 @@
         <div class="col-md-6 col-lg-4">
             <div class="card mt-5">
                 <div class="card-body">
-                    <h3 class="text-center mb-4">Register</h3>
-                    <form action="/register" method="POST">
+                    <h3 class="text-center mb-4">Daftar</h3>
+                    <form action="{{ url('/register') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
@@ -24,8 +24,19 @@
                             <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
 
+
+                        <!-- Dropdown Role -->
+                        <div class="mb-3">
+                            <label for="role" class="form-label">Pilih Role</label>
+                            <select class="form-select" id="role" name="role" required>
+                                <option value="" disabled selected>Pilih Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option> <!-- Ubah 'karyawan' menjadi 'user' -->
+                            </select>
+                        </div>
+
                         <div class="d-grid gap-2 mb-3">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <button type="submit" class="btn btn-primary">Daftar</button>
                         </div>
 
                         <div class="text-center">

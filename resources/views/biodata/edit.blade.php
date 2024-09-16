@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             <label for="tanggal_lahir">Tanggal Lahir</label>
-            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $biodata->tanggal_lahir->format('Y-m-d')) }}" required>
+            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', optional($biodata->tanggal_lahir)->format('Y-m-d')) }}" required>
             @error('tanggal_lahir')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
