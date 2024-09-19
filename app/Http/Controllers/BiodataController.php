@@ -6,6 +6,7 @@ use App\Models\Biodata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon; // Tambahkan baris ini untuk mengimpor Carbon
+use Illuminate\Support\Facades\Auth;
 
 class BiodataController extends Controller
 {
@@ -28,29 +29,29 @@ class BiodataController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'foto' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-        'nama_lengkap' => 'required|string|max:255',
-        'tempat_lahir' => 'required|string|max:255',
-        'tanggal_lahir' => 'required|date',
-        'nomor_hp' => 'required|string|max:20',
-        'user_id' => 'required|exists:users,id',
-    ]);
+    {
+        $request->validate([
+            'foto' => 'required|image|mimes:jpg,png,jpeg|max:2048',
+            'nama_lengkap' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'nomor_hp' => 'required|string|max:20',
+            'user_id' => 'required|exists:users,id',
+        ]);
 
-    $path = $request->file('foto')->store('public/fotos');
+        $path = $request->file('foto')->store('public/fotos');
 
-    Biodata::create([
-        'foto' => $path,
-        'nama_lengkap' => $request->nama_lengkap,
-        'tempat_lahir' => $request->tempat_lahir,
-        'tanggal_lahir' => $request->tanggal_lahir,
-        'nomor_hp' => $request->nomor_hp,
-        'user_id' => $request->user_id,
-    ]);
+        Biodata::create([
+            'foto' => $path,
+            'nama_lengkap' => $request->nama_lengkap,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'nomor_hp' => $request->nomor_hp,
+            'user_id' => $request->user_id,
+        ]);
 
-    return redirect()->route('biodata.index')->with('success', 'Biodata berhasil ditambahkan.');
-}
+        return redirect()->route('biodata.index')->with('success', 'Biodata berhasil ditambahkan.');
+    }
 
     public function edit(Biodata $biodata)
     {
@@ -82,7 +83,7 @@ class BiodataController extends Controller
             'user_id' => $request->user_id,
         ]);
 
-        return redirect()->route('biodata.update')->with('success', 'Biodata berhasil diperbarui.');
+        return redirect()->route('biodata.index')->with('success', 'Biodata berhasil diperbarui.');
     }
 
     public function destroy(Biodata $biodata)

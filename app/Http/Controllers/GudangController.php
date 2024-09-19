@@ -52,4 +52,6 @@ class GudangController extends Controller
         $gudang->delete();
         return redirect()->route('gudangs.index')->with('success', 'Gudang berhasil dihapus.');
     }
+
+
 }

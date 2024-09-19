@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <h3 class="text-center mb-4">Login</h3>
 
-                    <!-- Menampilkan pesan kesalahan jika login gagal -->
+                    
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

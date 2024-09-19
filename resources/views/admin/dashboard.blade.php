@@ -48,12 +48,12 @@
         // Data for the chart
         const ctx = document.getElementById('myChart').getContext('2d');
         const myChart = new Chart(ctx, {
-            type: 'bar', // Change the type to 'line', 'pie', etc., as needed
+            type: 'bar',
             data: {
-                labels: ['Pengguna', 'Produk', 'Gudang'], // Labels for the chart
+                labels: ['Pengguna', 'Produk', 'Gudang'],
                 datasets: [{
                     label: 'Jumlah',
-                    data: [{{ $usersCount }}, {{ $productsCount }}, {{ $gudangsCount }}], // Data to display
+                    data: [{{ $usersCount }}, {{ $productsCount }}, {{ $gudangsCount }}],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -61,7 +61,7 @@
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false, // Ensures the chart is not constrained to the aspect ratio
+                maintainAspectRatio: false,
                 scales: {
                     y: {
                         beginAtZero: true
@@ -74,11 +74,11 @@
     <style>
         .chart-container {
             position: relative;
-            height: 400px; /* Adjust the height as needed */
+            height: 400px;
         }
         @media (max-width: 768px) {
             .chart-container {
-                height: 300px; /* Adjust the height for smaller screens */
+                height: 300px;
             }
         }
 
