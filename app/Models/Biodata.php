@@ -15,7 +15,7 @@ class Biodata extends Model
         'foto', 'nama_lengkap', 'tempat_lahir', 'tanggal_lahir', 'nomor_hp', 'user_id'
     ];
 
-    // Tentukan tabel jika nama tabel tidak sesuai dengan konvensi plural
+
     protected $table = 'biodatas';
 }
 

@@ -12,10 +12,10 @@ class BiodataController extends Controller
 {
     public function index()
     {
-        // Mengambil biodata untuk pengguna yang sedang login
+
         $biodatas = Biodata::where('user_id', auth()->id())->get();
 
-        // Konversi tanggal lahir menjadi Carbon instance
+
         foreach ($biodatas as $biodata) {
             $biodata->tanggal_lahir = Carbon::parse($biodata->tanggal_lahir);
         }

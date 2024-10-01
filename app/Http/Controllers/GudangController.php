@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gudang;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class GudangController extends Controller
 {
+    protected $productController;
+
+    public function __construct(ProductController $productController)
+    {
+        $this->productController = $productController;
+    }
+
     public function index()
     {
-        $gudangs = Gudang::all();
+        $gudangs = Gudang::with('products')->paginate(10);
         return view('gudangs.index', compact('gudangs'));
     }
 
@@ -53,5 +61,27 @@ class GudangController extends Controller
         return redirect()->route('gudangs.index')->with('success', 'Gudang berhasil dihapus.');
     }
 
+    public function show($id)
+    {
+        $gudang = Gudang::findOrFail($id);
+        $produk = Product::where('gudang_id', $id)->get();
+        $totalUsedCapacity = $produk->sum('stok');
+        $available_capacity = $gudang->kapasitas - $totalUsedCapacity;
 
+        // Tambahkan notifikasi jika kapasitas hampir penuh atau penuh
+        if ($totalUsedCapacity >= $gudang->kapasitas) {
+            return redirect()->route('gudangs.index')->with('error', 'Kapasitas gudang sudah penuh.');
+        } elseif ($available_capacity <= 10) { // Misalkan 10 adalah batas hampir penuh
+            return redirect()->route('gudangs.index')->with('warning', 'Kapasitas gudang hampir penuh. Sisa kapasitas: ' . $available_capacity);
+        }
+
+        return view('gudangs.show', compact('gudang', 'produk', 'available_capacity'));
+    }
+
+    public function getUsedCapacityByGudang($gudang_id)
+    {
+        $products = Product::where('gudang_id', $gudang_id)->get();
+        $usedCapacity = $products->sum('stok');
+        return $usedCapacity;
+    }
 }

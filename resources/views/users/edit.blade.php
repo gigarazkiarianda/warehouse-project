@@ -34,7 +34,7 @@
                 <option value="">Pilih Peran</option>
                 <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
                 <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
-                <!-- Tambahkan peran lain jika diperlukan -->
+
             </select>
             @error('role')
                 <div class="invalid-feedback">{{ $message }}</div>

@@ -142,7 +142,7 @@ footer {
 }
 
 .dropdown-toggle::after {
-    display: none; /* Hides default dropdown arrow */
+    display: none;
 }
 
 
@@ -185,12 +185,6 @@ footer {
                             <a class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                                 <i class="bi bi-person"></i>
                                 <span>Manajemen Pengguna</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.*') ? 'active' : '' }}" href="{{ route('admin.index') }}">
-                                <i class="bi bi-shield-shaded"></i>
-                                <span>Admin</span>
                             </a>
                         </li>
                     @endif

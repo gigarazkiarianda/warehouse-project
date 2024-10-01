@@ -69,15 +69,15 @@
 
                 setTimeout(() => {
                     alert.remove();
-                }, 1000); // Durasi animasi fade-out
-            }, 5000); // Durasi tampilan notifikasi
+                }, 1000);
+            }, 5000);
         }
 
-        // Animasi untuk elemen kartu
+
         const cards = document.querySelectorAll('.card');
         cards.forEach((card, index) => {
             card.classList.add('fade-in');
-            card.style.animationDelay = `${index * 0.3}s`; // Jeda animasi untuk efek bertahap
+            card.style.animationDelay = `${index * 0.3}s`;
         });
     });
 </script>
@@ -85,17 +85,17 @@
 
 @section('styles')
 <style>
-    /* Animasi fade-in */
+
     .fade-in {
         animation: fadeIn 1s forwards;
     }
 
-    /* Animasi fade-out */
+
     .fade-out {
         animation: fadeOut 1s forwards;
     }
 
-    /* Keyframes untuk animasi fade-in */
+
     @keyframes fadeIn {
         from {
             opacity: 0;

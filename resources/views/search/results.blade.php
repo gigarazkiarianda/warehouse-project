@@ -51,7 +51,7 @@
                         <ul class="list-group">
                             @foreach($users as $user)
                                 <li class="list-group-item animate__animated animate__fadeIn">
-                                    <a href="{{ route('user.index', $user->id) }}" class="text-decoration-none">
+                                    <a href="{{ route('users.index', $user->id) }}" class="text-decoration-none">
                                         <h5 class="mb-1">{{ $user->name }}</h5>
                                     </a>
                                 </li>

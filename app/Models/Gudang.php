@@ -14,4 +14,10 @@ class Gudang extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getAvailableCapacityAttribute()
+    {
+        $totalProducts = $this -> products->sum('jumlah');
+        return $this -> kapasitas - $totalProducts;
+    }
 }

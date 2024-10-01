@@ -31,7 +31,7 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
                     <td>
-                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                        <a href="{{ route('biodata.index', $user->id) }}" class="btn btn-info btn-sm">Lihat</a>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
@@ -44,6 +44,6 @@
         </tbody>
     </table>
 
-    {{ $users->links() }} <!-- Pagination Links -->
+    {{ $users->links() }}
 </div>
 @endsection

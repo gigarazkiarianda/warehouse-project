@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -21,7 +20,7 @@ use App\Http\Controllers\SearchController;
 |
 */
 
-// Arahkan root URL ('/') langsung ke halaman login
+
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('home');
 
 // Rute untuk otentikasi
@@ -32,12 +31,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 
 
-// Rute yang memerlukan otentikasi
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Resource routes yang memerlukan otentikasi
-    Route::resource('categories', CategoryController::class);
     Route::resource('gudangs', GudangController::class);
     Route::resource('users', UserController::class);
 
@@ -45,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('biodata', BiodataController::class);
 
 
-    // Menggunakan middleware untuk rute tertentu
+
     Route::middleware(['role:admin'])->group(function () {
         Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/admin/settings', [AdminController::class, 'settings'])->name('admin.settings');
@@ -54,5 +51,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 });
 
-// Rute untuk admin yang tidak memerlukan otentikasi
+
 Route::get('/admin', [AdminController::class, 'index'])->middleware('role:admin')->name('admin.index');

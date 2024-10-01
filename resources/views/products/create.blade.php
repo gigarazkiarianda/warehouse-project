@@ -21,6 +21,10 @@
             <label for="stok">Stok</label>
             <input type="number" id="stok" name="stok" class="form-control" required>
         </div>
+        <div class="form-group mb-3">
+            <label for="category">Kategori</label>
+            <input type="text" id="category" name="category" class="form-control">
+        </div>
         <div class="form-group mb-4">
             <label for="gudang">Lokasi Gudang</label>
             <select id="gudang" name="gudang_id" class="form-control" required>
