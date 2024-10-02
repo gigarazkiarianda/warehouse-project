@@ -68,10 +68,10 @@ class GudangController extends Controller
         $totalUsedCapacity = $produk->sum('stok');
         $available_capacity = $gudang->kapasitas - $totalUsedCapacity;
 
-        // Tambahkan notifikasi jika kapasitas hampir penuh atau penuh
+
         if ($totalUsedCapacity >= $gudang->kapasitas) {
             return redirect()->route('gudangs.index')->with('error', 'Kapasitas gudang sudah penuh.');
-        } elseif ($available_capacity <= 10) { // Misalkan 10 adalah batas hampir penuh
+        } elseif ($available_capacity <= 10) {
             return redirect()->route('gudangs.index')->with('warning', 'Kapasitas gudang hampir penuh. Sisa kapasitas: ' . $available_capacity);
         }
 

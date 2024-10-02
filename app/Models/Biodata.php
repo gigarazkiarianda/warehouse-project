@@ -1,6 +1,6 @@
 <?php
 
-// app/Models/Biodata.php
+
 
 namespace App\Models;
 
@@ -17,5 +17,10 @@ class Biodata extends Model
 
 
     protected $table = 'biodatas';
+
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 }
 

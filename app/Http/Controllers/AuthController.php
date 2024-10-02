@@ -7,79 +7,87 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Gudang;
 
 class AuthController extends Controller
 {
-
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-
     public function login(Request $request)
     {
+        // Validasi input dari pengguna
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
         $credentials = $request->only('email', 'password');
 
-        Log::info('Attempting to login with credentials: ', $credentials);
+        // Mencatat log upaya login
+        Log::info('Mencoba login dengan kredensial: ', ['email' => $request->email]);
 
-
+        // Upaya login
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            Log::info('Login successful for user ID: ' . $user->id . ' with role: ' . $user->role);
+            Log::info('Login berhasil untuk pengguna ID: ' . $user->id . ' dengan peran: ' . $user->roles);
 
-
-            if ($user->role === 'admin') {
+            // Cek peran pengguna dan arahkan ke dashboard yang sesuai
+            if ($user->roles === 'admin') {
                 return redirect()->route('admin.dashboard');
-            } elseif ($user->role === 'user') {
+            } elseif ($user->roles === 'user') {
                 return redirect()->route('dashboard');
             }
 
-
+            // Jika peran tidak terdefinisi, tetap arahkan ke dashboard umum
             return redirect()->route('dashboard');
         }
 
-
-        Log::warning('Login failed for credentials: ', $credentials);
+        // Jika login gagal, kembalikan pesan error
+        Log::warning('Login gagal untuk email: ' . $request->email);
 
         return back()->withErrors([
             'email' => 'Email atau password yang Anda masukkan salah.',
         ])->withInput();
     }
 
-
     public function showRegisterForm()
     {
-        return view('auth.register');
+        // Menampilkan semua data gudang untuk dropdown saat registrasi
+        $gudangs = Gudang::all();
+        return view('auth.register', compact('gudangs'));
     }
 
-
     public function register(Request $request)
-{
+    {
+        // Validasi input registrasi
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+            'roles' => 'required|string|in:admin,user',
+            'gudang_id' => 'required|exists:gudangs,id',
+        ]);
 
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8',
-        'role' => 'required|string|in:admin,user',
-    ]);
+        // Buat user baru
+        User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'roles' => $validated['roles'],
+            'gudang_id' => $validated['gudang_id'],
+        ]);
 
+        // Arahkan ke halaman login setelah registrasi berhasil
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
+    }
 
-    User::create([
-        'name' => $validated['name'],
-        'email' => $validated['email'],
-        'password' => Hash::make($validated['password']),
-        'role' => $validated['role'],
-    ]);
-
-
-    return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
-}
-
-    // Menangani logout
     public function logout()
     {
-        Auth::logout(); // Log out the user
-        return redirect()->route('login'); // Redirect ke halaman login
+        // Proses logout pengguna
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

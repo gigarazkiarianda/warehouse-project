@@ -34,10 +34,10 @@
                     @foreach ($gudangs as $gudang)
                         <tr>
                             <td>
-                                <a href="{{ route('gudangs.show', $gudang->id) }}" class="text-black no-underline hover:text-blue-500">{{ $gudang->nama }}</a>
+                                <a href="{{ route('gudangs.show', $gudang->id) }}" class="warehouse-name">{{ $gudang->nama }}</a>
                             </td>
                             <td>{{ $gudang->lokasi }}</td>
-                            <td>{{ $gudang->kapasitas }} </td>
+                            <td>{{ $gudang->kapasitas }}</td>
                             <td>
                                 <a href="{{ route('gudangs.edit', $gudang->id) }}" class="btn btn-warning btn-sm me-2">Edit</a>
                                 <form action="{{ route('gudangs.destroy', $gudang->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus gudang ini?');">
@@ -62,11 +62,12 @@
 
 @section('styles')
 <style>
-    .text-black {
+    .warehouse-name {
         color: black;
-        text-decoration: none; /* Remove underline */
+        text-decoration: none;
+        transition: color 0.3s ease;
     }
-    .text-black:hover {
+    .warehouse-name:hover {
         color: blue;
     }
 </style>

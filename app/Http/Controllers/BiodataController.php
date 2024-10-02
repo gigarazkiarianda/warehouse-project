@@ -3,18 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Biodata;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon; // Tambahkan baris ini untuk mengimpor Carbon
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class BiodataController extends Controller
 {
     public function index()
     {
-
         $biodatas = Biodata::where('user_id', auth()->id())->get();
-
 
         foreach ($biodatas as $biodata) {
             $biodata->tanggal_lahir = Carbon::parse($biodata->tanggal_lahir);
@@ -91,10 +90,5 @@ class BiodataController extends Controller
         Storage::delete($biodata->foto);
         $biodata->delete();
         return redirect()->route('biodata.index')->with('success', 'Biodata berhasil dihapus.');
-    }
-
-    public function showDashboard() {
-        $biodata = Auth::user()->biodata; // Ambil data biodata dari user yang sedang login
-        return view('dashboard', compact('biodata'));
     }
 }

@@ -48,6 +48,6 @@ class AdminController extends Controller
      */
     public function settings()
     {
-        return view('admin.settings'); // Pastikan Anda memiliki view ini
+        return view('admin.settings');
     }
 }

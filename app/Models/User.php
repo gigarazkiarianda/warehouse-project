@@ -20,7 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'gudang_id',
+        'roles',
     ];
 
     /**
@@ -41,13 +42,30 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function hasRole($roleName)
+    /**
+     * Mengambil Gudang yang terkait dengan pengguna.
+     */
+    public function gudang()
     {
-        return $this->role === $roleName;
-    }
-    public function biodata()
-    {
-        return $this->hasOne(Biodata::class);
+        return $this->belongsTo(Gudang::class);
     }
 
+    /**
+     * Menampilkan biodata pengguna.
+     */
+    public function biodata()
+{
+    return $this->hasOne(Biodata::class);
+}
+
+    /**
+     * Memeriksa apakah pengguna memiliki role tertentu.
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return $this->roles === $role;
+    }
 }

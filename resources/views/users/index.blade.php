@@ -13,25 +13,41 @@
         </div>
     @endif
 
+    <style>
+        /* Add smooth hover effect to user names */
+        .user-name {
+            color: black;
+            text-decoration: none;
+            transition: color 0.3s ease; /* Smooth transition */
+        }
+
+        .user-name:hover {
+            color: blue; /* Change color to blue on hover */
+        }
+    </style>
+
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Nama</th>
                 <th>Email</th>
-                <th>Role</th>
+                <th>Gudang</th>
+                <th>Peran</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @forelse ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
                     <td>
-                        <a href="{{ route('biodata.index', $user->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                        <a href="{{ route('users.profile', $user->id) }}" class="user-name">{{ $user->name }}</a>
+                    </td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ optional($user->gudang)->nama }}</td>
+                    <td>{{ $user->roles }}</td>
+                    <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
@@ -40,7 +56,11 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center">Tidak ada pengguna ditemukan.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 

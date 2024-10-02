@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Gudang; // Assuming Gudang is the model for warehouses
+use App\Models\Gudang;
 use App\Models\User;
 
 class SearchController extends Controller
@@ -14,9 +14,13 @@ class SearchController extends Controller
         $query = $request->input('query');
 
 
+        if (empty($query)) {
+
+            return redirect()->back()->with('message', 'Please enter a search term.');
+        }
+
+
         $products = Product::where('nama', 'like', '%' . $query . '%')->get();
-
-
         $gudangs = Gudang::where('nama', 'like', '%' . $query . '%')->get();
 
 
@@ -25,6 +29,7 @@ class SearchController extends Controller
         } else {
             $users = collect();
         }
+
 
         return view('search.results', compact('products', 'gudangs', 'users'));
     }

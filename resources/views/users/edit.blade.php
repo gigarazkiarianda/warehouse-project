@@ -27,16 +27,32 @@
             @enderror
         </div>
 
-        <!-- Input untuk peran pengguna -->
+        <!-- Dropdown untuk gudang -->
         <div class="mb-3">
-            <label for="role" class="form-label">Peran</label>
-            <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
-                <option value="">Pilih Peran</option>
-                <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
-                <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
-
+            <label for="gudang_id" class="form-label">Pilih Gudang</label>
+            <select class="form-select @error('gudang_id') is-invalid @enderror" id="gudang_id" name="gudang_id" required>
+                <option value="" disabled>Pilih Gudang</option>
+                @foreach ($gudangs as $gudang)
+                    <option value="{{ $gudang->id }}" {{ old('gudang_id', $user->gudang_id) == $gudang->id ? 'selected' : '' }}>
+                        {{ $gudang->nama }}
+                    </option>
+                @endforeach
             </select>
-            @error('role')
+            @error('gudang_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <!-- Dropdown untuk peran pengguna -->
+        <div class="mb-3">
+            <label for="roles" class="form-label">Pilih Peran</label>
+            <select class="form-select @error('roles') is-invalid @enderror" id="roles" name="roles" required>
+                <option value="" disabled>Pilih Peran</option>
+                <option value="admin" {{ old('roles', $user->roles) == 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="karyawan" {{ old('roles', $user->roles) == 'karyawan' ? 'selected' : '' }}>Karyawan</option>
+                <option value="supervisor" {{ old('roles', $user->roles) == 'supervisor' ? 'selected' : '' }}>Supervisor</option>
+            </select>
+            @error('roles')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
         </div>

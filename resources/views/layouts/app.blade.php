@@ -11,144 +11,156 @@
     <!-- Bootstrap Icons CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <style>
-       html, body {
-    height: 100%;
-    margin: 0;
-}
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
+        body {
+            display: flex;
+            flex-direction: column;
+        }
 
-.navbar-brand-custom {
-    font-size: 25px;
-    font-weight: bold;
-    font-family: Arial, sans-serif;
-}
+        .navbar-brand-custom {
+            font-size: 25px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
 
-.sidebar {
-    background-color: #343a40;
-    color: #ffffff;
-    height: 100vh;
-    position: fixed;
-    width: 250px; /* Default width */
-    z-index: 1000;
-    overflow-x: hidden;
-    transition: width 0.3s;
-    padding: 1rem;
-    box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1); /* Shadow on the right side */
-}
+        .sidebar {
+            background-color: #343a40;
+            color: #ffffff;
+            height: 100vh;
+            position: fixed;
+            width: 250px; /* Default width */
+            z-index: 1000;
+            overflow-x: hidden;
+            transition: width 0.3s;
+            padding: 1rem;
+            box-shadow: 4px 0 6px rgba(0, 0, 0, 0.1); /* Shadow on the right side */
+        }
 
-.sidebar.collapsed {
-    width: 80px; /* Width when collapsed */
-}
+        .sidebar.collapsed {
+            width: 80px; /* Width when collapsed */
+        }
 
-.sidebar .nav-link {
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    font-size: 16px; /* Adjust font size for readability */
-}
+        .sidebar .nav-link {
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            font-size: 16px; /* Adjust font size for readability */
+        }
 
-.sidebar .nav-link.active {
-    background-color: #495057;
-}
+        .sidebar .nav-link.active {
+            background-color: #495057;
+        }
 
-.sidebar .nav-link:hover {
-    background-color: #495057;
-}
+        .sidebar .nav-link:hover {
+            background-color: #495057;
+        }
 
-.sidebar .nav-item {
-    margin-bottom: 1px;
-}
+        .sidebar .nav-item {
+            margin-bottom: 1px;
+        }
 
-.sidebar .nav-item i {
-    margin-right: 10px;
-    font-size: 18px;
-}
+        .sidebar .nav-item i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
 
-.sidebar .nav-link span {
-    display: inline-block;
-    white-space: nowrap;
-}
+        .sidebar .nav-link span {
+            display: inline-block;
+            white-space: nowrap;
+        }
 
-.sidebar.collapsed .nav-link span {
-    display: none; /* Hide text when collapsed */
-}
+        .sidebar.collapsed .nav-link span {
+            display: none; /* Hide text when collapsed */
+        }
 
-.sidebar.collapsed .nav-link i {
-    font-size: 24px; /* Adjust icon size if needed */
-}
+        .sidebar.collapsed .nav-link i {
+            font-size: 24px; /* Adjust icon size if needed */
+        }
 
-.sidebar .toggle-btn {
-    position: absolute;
-    top: 20px; /* Increase top margin to ensure it's not too close to the top edge */
-    right: 10px; /* Adjusted for better visibility while ensuring it’s within the sidebar */
-    background-color: #343a40;
-    color: #ffffff;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow for better visibility */
-    z-index: 1050; /* Ensure it’s above other content */
-    transition: right 0.3s ease; /* Smooth transition for positioning */
-}
+        .sidebar .toggle-btn {
+            position: absolute;
+            top: 20px; /* Increase top margin to ensure it's not too close to the top edge */
+            right: 10px; /* Adjusted for better visibility while ensuring it’s within the sidebar */
+            background-color: #343a40;
+            color: #ffffff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow for better visibility */
+            z-index: 1050; /* Ensure it’s above other content */
+            transition: right 0.3s ease; /* Smooth transition for positioning */
+        }
 
-.navbar-brand img {
-    max-height: 30px;
-}
+        .navbar-brand img {
+            max-height: 30px;
+        }
 
-.content-wrapper {
-    margin-left: 250px;
-    flex: 1; /* Allow content to expand and push footer down */
-    transition: margin-left 0.3s;
-}
+        .content-wrapper {
+            margin-left: 250px;
+            flex: 1; /* Allow content to expand and push footer down */
+            transition: margin-left 0.3s;
+        }
 
-.content-wrapper.collapsed {
-    margin-left: 80px;
-}
+        .content-wrapper.collapsed {
+            margin-left: 80px;
+        }
 
-footer {
-    background-color: #343a40;
-    color: #ffffff;
-    text-align: center;
-    padding: 1rem;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
 
-.search-bar {
-    width: 300px;
-}
+        .search-bar {
+            width: 300px;
+            background-color: #495057; /* Set a background color for the search bar */
+            color: #ffffff; /* Change text color to white for better contrast */
+            border: 1px solid #6c757d; /* Border color */
+        }
 
-.profile-menu {
-    margin-left: 20px;
-}
+        .search-bar::placeholder {
+            color: #ffffff; /* Change placeholder text color to white */
+            opacity: 0.7; /* Placeholder opacity */
+        }
 
-.navbar-nav {
-    align-items: center;
-}
+        .search-bar:focus {
+            background-color: #6c757d; /* Darker background on focus for better visibility */
+            color: #ffffff; /* Keep text color white */
+        }
 
-.dropdown-toggle::after {
-    display: none;
-}
+        .profile-menu {
+            margin-left: 20px;
+        }
 
+        .navbar-nav {
+            align-items: center;
+        }
 
-.sidebar.collapsed .navbar-brand-custom {
-    display: none;
-}
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .sidebar.collapsed .navbar-brand-custom {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -204,7 +216,7 @@ footer {
                         <div class="d-flex align-items-center">
                             <!-- Search Bar -->
                             <form class="d-flex me-3" method="GET" action="{{ route('search') }}">
-                                <input class="form-control search-bar text-light" type="search" placeholder="Cari Produk atau Gudang" aria-label="Search" name="query" value="{{ request('query') }}">
+                                <input class="form-control search-bar" type="search" placeholder="Cari Produk atau Gudang" aria-label="Search" name="query" value="{{ request('query') }}">
                                 <button class="btn btn-outline-light ms-2" type="submit">Cari</button>
                             </form>
                             <!-- User Dropdown -->
@@ -219,7 +231,7 @@ footer {
                                     <span style="margin-bottom: 20px;">{{ Auth::user()->name }}</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                    <li><a class="dropdown-item" href="{{ route('biodata.index') }}">Profil</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('users.myProfile') }}">Profile</a></li>
                                     <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

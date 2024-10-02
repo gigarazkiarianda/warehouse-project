@@ -13,12 +13,12 @@ class ProductController extends Controller
         $gudangs = Gudang::all();
         $selectedGudangId = $request->input('gudang_id');
 
-        // Ambil produk dengan kondisi gudang
+
         $products = Product::when($selectedGudangId, function ($query) use ($selectedGudangId) {
             return $query->where('gudang_id', $selectedGudangId);
         })->paginate(10);
 
-        // Cek stok untuk notifikasi
+
         foreach ($products as $product) {
             if ($product->stok <= 0) {
                 return redirect()->route('products.index')->with('error', "Produk '{$product->nama}' habis.");
@@ -49,7 +49,7 @@ class ProductController extends Controller
 
         $product = Product::create($request->all());
 
-        // Notifikasi setelah menambahkan produk
+
         if ($product->stok <= 0) {
             return redirect()->route('products.index')->with('error', "Produk '{$product->nama}' habis.");
         } elseif ($product->stok < 5) {
@@ -71,7 +71,7 @@ class ProductController extends Controller
 
         $product->update($request->all());
 
-        // Notifikasi setelah memperbarui produk
+
         if ($product->stok <= 0) {
             return redirect()->route('products.index')->with('error', "Produk '{$product->nama}' habis.");
         } elseif ($product->stok < 5) {
@@ -93,7 +93,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');
     }
 
-    // Method untuk mengambil kapasitas yang digunakan berdasarkan gudang
+
     public function getUsedCapacityByGudang($gudangId)
     {
         return Product::where('gudang_id', $gudangId)->sum('stok');

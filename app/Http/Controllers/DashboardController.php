@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Gudang;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth; // Import facade Auth
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
